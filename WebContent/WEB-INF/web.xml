@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>qp-redis</display-name>
+	
+	<servlet>
+		<servlet-name>Service/Post</servlet-name>
+		<servlet-class>rnd.quickpost.service.Post</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Service/Post</servlet-name>
+		<url-pattern>/Service/Post</url-pattern>
+	</servlet-mapping>
+
+		<servlet>
+		<servlet-name>Service/Comment</servlet-name>
+		<servlet-class>rnd.quickpost.service.Comment</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Service/Comment</servlet-name>
+		<url-pattern>/Service/Comment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Service/Fetch</servlet-name>
+		<servlet-class>rnd.quickpost.service.Fetch</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Service/Fetch</servlet-name>
+		<url-pattern>/Service/Fetch</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Service/UpdatePosts</servlet-name>
+		<servlet-class>rnd.quickpost.service.UpdatePosts</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Service/UpdatePosts</servlet-name>
+		<url-pattern>/Service/UpdatePosts</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Service/ResetRedis</servlet-name>
+		<servlet-class>rnd.quickpost.service.ResetRedis</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Service/ResetRedis</servlet-name>
+		<url-pattern>/Service/ResetRedis</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Profile</servlet-name>
+		<jsp-file>/profile.jsp</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Profile</servlet-name>
+		<url-pattern>/path/to/profile</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>quickpost.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
