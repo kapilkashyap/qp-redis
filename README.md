@@ -9,7 +9,7 @@ You can evaluate the quickpost widget after deploying 'qp-redis' to a webserver.
 
 Please use the below url for evaluation: 
 
-http://<hostname>:<port>/qp-redis/jquery-quickpost-widget/demos/index.html
+http://&lt;hostname&gt;:&lt;port&gt;/qp-redis/jquery-quickpost-widget/demos/index.html
 
 
 ### Requirements & Notes
