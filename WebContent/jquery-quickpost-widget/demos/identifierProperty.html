@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quick Post Widget - identifierProperty</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="assets/prettify.js"></script>
+		<script type="text/javascript" src="assets/filterJSON.plugin.min.js"></script>
+		<script type="text/javascript" src="../src/paginated.dropdown.widget.min.js"></script>
+		<script type="text/javascript" src="../src/quickpost.widget.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/prettify.css" />
+		<link rel="stylesheet" type="text/css" href="../style/quickpost.widget.css" />
+	</head>
+	<body onload="prettyPrint();">
+		<div class="header">
+			Property: identifierProperty (default is id)
+		</div>
+		<div class="marginTB5px explanation">
+			This property is used to determine which property in the JSON object would be used to uniquely
+			identify the contents of the JSON object. This property is used to create the contents of the
+			hidden field corresponding to the contents of the input area.
+		</div>
+		<div class="marginT15px sample-code">Whenever a value is selected from the drop down, the hidden field value is updated as below:</div>
+<pre class="prettyprint">
+@[&lt;selected values identifierProperty value&gt;:&lt;selected values valueProperty value&gt;]
+</pre>
+		<div class="marginT15px sample-code">So if identifierProperty is 'id', valueProperty is 'name' and 'SR Tendulkar' is selected from the drop down whose JSON object is as below:</div>
+<pre class="prettyprint">
+{
+	"name": "SR Tendulkar",
+	"email": "sr.tendulkar@cricket.com",
+	"id": 1234567000
+}
+</pre>
+		<div class="marginT15px sample-code">Then the hidden field value will be of the following construct:</div>
+<pre class="prettyprint">
+&lt;input type="hidden" value="@[1234567000:SR Tendulkar]" name="x_quickpost_hidden_input" class="x-quickpost-hidden-input" /&gt;
+</pre>
+		<div class="marginT15px sample-code">Now when the comment is posted, the backend code can construct a hyperlink as follows:</div>
+<pre class="prettyprint">
+&lt;a href="path/to/profile/1234567000"&gt;SR Tendulkar&lt;/a&gt;
+</pre>
+<span class="mandatory">#</span>You can see the hidden field value in the console.
+		<div class="marginT15px demo">Demo: default behaviour</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-1" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-1" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith: true}
+});
+</pre>
+		<div class="marginT15px demo">Demo: Setting identifierProperty to email</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-2" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-2" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith: true},
+	identifierProperty: "email"
+});
+</pre>
+	</body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( '#x-demo-1' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true}
+			});
+			$( '#x-demo-2' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true},
+				identifierProperty: "email"
+			});
+		});
+	</script>
+</html>

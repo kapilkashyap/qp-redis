@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quick Post Widget - Custom Width</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="assets/filterJSON.plugin.min.js"></script>
+		<script type="text/javascript" src="assets/prettify.js"></script>
+		<script type="text/javascript" src="../src/paginated.dropdown.widget.min.js"></script>
+		<script type="text/javascript" src="../src/quickpost.widget.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/prettify.css" />
+		<link rel="stylesheet" type="text/css" href="../style/quickpost.widget.css" />
+	</head>
+	<body onload="prettyPrint();">
+		<div class="header">
+			Property: dropdownWidth (default is null)
+		</div>
+		<div class="marginTB5px explanation">
+			This property is used to set the width of the drop down container. If not specified, 
+			the width of the drop down container is set to the width of the bound element.
+		</div>
+		<div class="marginT15px demo">Demo: default behaviour</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-1" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-1" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith:true}
+});
+</pre>
+		<div class="marginT15px demo">Demo: Setting dropdownWidth to 200</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-2" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-2" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@name}&lt;/div&gt;&lt;/div&gt;",
+	dropdownWidth: 200,
+	filterJSON: {startsWith:true}
+});
+</pre>
+	</body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( '#x-demo-1' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true}
+			});
+			$( '#x-demo-2' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				dropdownWidth: 200,
+				filterJSON: {startsWith:true}
+			});
+		});
+	</script>
+</html>

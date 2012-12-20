@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quick Post Widget - Default</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="assets/filterJSON.plugin.js"></script>
+		<script type="text/javascript" src="../src/paginated.dropdown.widget.js"></script>
+		<script type="text/javascript" src="../src/quickpost.widget.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/style.css" />
+		<link rel="stylesheet" type="text/css" href="../style/quickpost.widget.css" />
+	</head>
+	<body>
+		<div>
+			<div class="marginT10px" style="border: 2px solid #FFFFFF; padding: 5px;">
+				<div class="x-inline-block">
+					<div id="x-demo-1" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+				</div>
+				<div class="x-inline-block" style="margin-left: 10px; vertical-align: top;"><span class="mandatory">#</span>Use below table to configure Quick Post Widget applied to this contenteditable div.</div>
+			</div>
+			<br/>
+			<div class="paddingT20px">
+				<table class="input-form">
+					<tr class="input-row">
+						<th>Properties</th>
+						<th>Values</th>
+					</tr>
+<!--
+					<tr class="input-row">
+						<td class="input-label inputBorder" colspan="2">Paginated Drop Down Widget</td>
+					</tr>
+-->
+					<tr class="input-row">
+						<td class="input-label text inputBorder">url<span class="mandatory">*</span>:</td>
+						<td class="input-field text inputBorder">
+							<input id="url" type="text" value="assets/cricketers.json" />
+							<span class="input-label">Default: null (Current value returns json object with id, name and email property)</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">itemTemplate<span class="mandatory">*</span>:</td>
+						<td class="input-field text inputBorder">
+							<textarea id="item-template" name="template" class="textArea"><div title="{@:id}"><div>{@:name}</div><div>{@:email}</div></div></textarea>
+							<span class="input-label">Default: null</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">valueProperty<span class="mandatory">*</span>:</td>
+						<td class="input-field text inputBorder">
+							<select id="value-property">
+								<option value="name">name</option>
+								<option value="email">email</option>
+								<option value="id">id</option>
+							</select>
+							<span class="input-label">Default: null (one of the properties in the returned json object.)</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">triggerOn:</td>
+						<td class="input-field text inputBorder">
+							<input id="triggerOn" type="text" value="@" />
+							<span class="input-label">Default: @</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">identifierProperty:</td>
+						<td class="input-field text inputBorder">
+							<select id="identifierProperty">
+								<option value="id">id</option>
+								<option value="name">name</option>
+								<option value="email">email</option>
+							</select>
+							<span class="input-label">Default: id (one of the properties in the returned json object to uniquely define the object.)</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">autoHeight:</td>
+						<td class="input-field text inputBorder">
+							<select id="autoHeight">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+							<span class="input-label">Default: true</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">increaseHeightAfter:</td>
+						<td class="input-field text inputBorder">
+							<input id="increaseHeightAfter" type="text" value="75" />
+							<span class="input-label">Default: 75 (characters)</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">deltaHeight:</td>
+						<td class="input-field text inputBorder">
+							<input id="deltaHeight" type="text" value="20" />
+							<span class="input-label">Default: 20 (pixels)</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">itemsPerPage:</td>
+						<td class="input-field text inputBorder">
+							<select id="items-per-page">
+								<option value="5">5</option>
+								<option value="10">10</option>
+								<option value="15">15</option>
+							</select>
+							<span class="input-label">Default: 10</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">dropdownWidth:</td>
+						<td class="input-field text inputBorder">
+							<input id="dropdown-width" type="text" name="dropdownWidth" value="" />
+							<span class="input-label">Enter numeric value. Default: null</span>
+						</td>
+					</tr>
+					<!--
+					<tr class="input-row">
+						<td class="input-label text inputBorder">persistState:</td>
+						<td class="input-field text inputBorder">
+							<select id="persist-state">
+								<option value="true">True</option>
+								<option value="false" selected="selected">False</option>
+							</select>
+							<span class="input-label">Default: false</span>
+						</td>
+					</tr>
+					-->
+					<tr class="input-row">
+						<td class="input-label text inputBorder">closeBtnRequired:</td>
+						<td class="input-field text inputBorder">
+							<select id="close-btn-required">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+							<span class="input-label">Default: true</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">footerRequired:</td>
+						<td class="input-field text inputBorder">
+							<select id="footer-required">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+							<span class="input-label">Default: true</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">keyNavigation.up-down:</td>
+						<td class="input-field text inputBorder">
+							<select id="up-down">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+							<span class="input-label">Default: true</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">keyNavigation.next-prev:</td>
+						<td class="input-field text inputBorder">
+							<select id="next-prev">
+								<option value="true">True</option>
+								<option value="false">False</option>
+							</select>
+							<span class="input-label">Default: true</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">customEventPrefix:</td>
+						<td class="input-field text inputBorder">
+							<input id="custom-event-prefix" type="text" name="customEventPrefix" value="" />
+							<span class="input-label">Default: 'quickpost'</span>
+						</td>
+					</tr>
+					<tr class="input-row">
+						<td class="input-label text inputBorder">filterJSON:</td>
+						<td class="input-field text inputBorder">
+							<textarea id="filterJSON" name="filterJSON" class="textArea">{"wrapper": true, "checkContains": false, "startsWith": true, "matchCase": false, "avoidDuplicates": false}</textarea>
+							<span class="input-label">Default: null</span>
+						</td>
+					</tr>
+					<!--
+					<tr class="input-row">
+						<td class="input-label text inputBorder">cache:</td>
+						<td class="input-field text inputBorder">
+							<select id="cache">
+								<option value="false">False</option>
+								<option value="true">True</option>
+							</select>
+							<span class="input-label">Default: false</span>
+						</td>
+					</tr>
+					-->
+					<tr class="input-row">
+						<td colspan="2">
+							<button id="btn-apply" name="Apply">Apply Changes</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( "#x-demo-1" ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith: true}
+			}).bind( "quickpostitemselected", function( event, data ) {
+				if(window.console) {
+					console.log("callback - quickpostitemselected");
+					console.log(event);
+					console.log(data);
+				}
+		    });
+		});
+
+		$( "#btn-apply" ).click(function( event ) {
+			var autoHeight = $( "#autoHeight" ).val(),
+				increaseHeightAfter = $( "#increaseHeightAfter" ).val(),
+				deltaHeight = $( "#deltaHeight" ).val(),
+				dropdownWidth = $( "#dropdown-width" ).val(),
+				//persistState = $( "#persist-state" ).val(),
+				closeBtnRequired = $( "#close-btn-required" ).val(),
+				footerRequired = $( "#footer-required" ).val(),
+				upDown = $( "#up-down" ).val(),
+				nextPrev = $( "#next-prev" ).val(),
+				cep = $( "#custom-event-prefix" ).val(),
+				//cache = $( "#cache" ).val(),
+				filterJSONConfig = $( "#filterJSON" ).val();
+
+			$( "#x-demo-1" ).quickpost( "destroy" );
+			
+			$( "#x-demo-1" ).quickpost({
+				url: $( "#url" ).val(),
+				itemTemplate: $( "#item-template" ).val(),
+				valueProperty: $( "#value-property" ).val(),
+				triggerOn: $( "#triggerOn" ).val(),
+				identifierProperty: $( "#identifierProperty" ).val(),
+				autoHeight: autoHeight == "true" ? true : false,
+				increaseHeightAfter: increaseHeightAfter != "" && parseInt(increaseHeightAfter, 10) ? parseInt(increaseHeightAfter, 10) : null,
+				deltaHeight: deltaHeight != "" && parseInt(deltaHeight, 10) ? parseInt(deltaHeight, 10) : 20,
+				itemsPerPage: $( "#items-per-page" ).val(),
+				dropdownWidth: dropdownWidth != "" && parseInt(dropdownWidth, 10) ? parseInt(dropdownWidth, 10) : null,
+				//persistState: persistState == "true" ? true : false,
+				closeBtnRequired: closeBtnRequired == "true" ? true : false,
+				footerRequired: footerRequired == "true" ? true : false,
+				keyNavigation: {
+					up_down: upDown == "true" ? true : false,
+					next_prev: nextPrev == "true" ? true : false
+				},
+				filterJSON: filterJSONConfig.length > 0 ? $.parseJSON(filterJSONConfig) : false,
+				customEventPrefix: cep == "" ? null : cep
+				//cache: cache == "true" ? true : false
+			}).bind( (cep != "" ? cep : $.kk.quickpost.prototype.widgetEventPrefix) + "itemselected", function( event, data ) {
+				if(window.console) {
+					console.log("callback - " + event.type);
+					console.log(event);
+					console.log(data);
+				}
+		    });
+			$( "#x-demo-1" ).css("height", null).html( "" ).keydown();
+		});
+	</script>
+</html>

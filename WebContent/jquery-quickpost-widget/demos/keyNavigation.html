@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quick Post Widget - Key Navigation</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="assets/filterJSON.plugin.min.js"></script>
+		<script type="text/javascript" src="assets/prettify.js"></script>
+		<script type="text/javascript" src="../src/paginated.dropdown.widget.min.js"></script>
+		<script type="text/javascript" src="../src/quickpost.widget.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/prettify.css" />
+		<link rel="stylesheet" type="text/css" href="../style/quickpost.widget.css" />
+	</head>
+	<body onload="prettyPrint();">
+		<div class="header">
+			Property: keyNavigation
+		</div>
+		<div class="marginTB5px explanation">
+			This property is used associate keyboard navigation keys with the drop down. Up down,
+			next and previous key navigation is possible on the drop down items. The up_down property
+			under keyNavigation is to toggle the up and down navigation. While next_prev property
+			under keyNavigation is to toggle the ability to navigate through pages using left and right
+			navigation keys.<br/>
+			<span class="mandatory">#</span>However you can navigate through pages using the arrow buttons provided in the footer.
+		</div>
+		<div class="marginTB5px sample-code">Default values:</div>
+<pre class="prettyprint">
+keyNavigation: {
+	up_down: true,
+	next_prev: true
+}
+</pre>
+		<div class="marginT15px demo">Demo: default behaviour</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-1" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-1" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith:true}
+});
+</pre>
+		<div class="marginT15px demo">Demo: Turn off page navigation</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-2" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-2" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith:true},
+	keyNavigation: {
+		next_prev: false
+	}
+});
+</pre>
+		<div class="marginT15px demo">Demo: Turn off item navigation</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-3" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-3" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith:true},
+	keyNavigation: {
+		up_down: false
+	}
+});
+</pre>
+		<div class="marginT15px demo">Demo: Turn off keyNavigation</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-4" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-4" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith:true},
+	keyNavigation: {
+		up_down: false,
+		next_prev: false
+	}
+});
+</pre>
+	</body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( '#x-demo-1' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true}
+			});
+			$( '#x-demo-2' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true},
+				keyNavigation: {
+					next_prev: false
+				}
+			});
+			$( '#x-demo-3' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true},
+				keyNavigation: {
+					up_down: false
+				}
+			});
+			$( '#x-demo-4' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith:true},
+				keyNavigation: {
+					up_down: false,
+					next_prev: false
+				}
+			});
+		});
+	</script>
+</html>

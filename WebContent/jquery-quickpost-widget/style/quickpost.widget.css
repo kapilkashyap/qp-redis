@@ -1,0 +1,34 @@
+/* input element wrapper
+------------------------------------------------ */
+.quickpost-wrapper { border: 1px solid #808080; background-color: #FFFFFF; font-family: verdana; font-size: 12px; cursor: default; }
+/* input element mark-up
+------------------------------------------------ */
+.quickpost-wrapper .quickpost { border-width: 0px !important; outline: none; overflow: hidden; margin: 2px; cursor: text; word-wrap: break-word; }
+/* selected suggestion mark-up
+------------------------------------------------ */
+.quickpost-wrapper .quickpost button { font-size: 12px; font-weight: normal; margin: 0; padding: 0; border: none; background-color: #DDDDDD; cursor: pointer !important; }
+.quickpost-wrapper .quickpost button span { font-size: 12px; background-color: #DDDDDD; }
+.quickpost-wrapper .quickpost b { font-size: 12px; font-weight: normal; margin: 0; padding: 0; border: none; background-color: #DDDDDD; cursor: pointer !important; }
+/* drop down container and close button
+------------------------------------------------ */
+.quickpost-wrapper .quickpost-container { position: absolute; border: 1px solid #808080; background-color: #FFFFFF; }
+.quickpost-container div { padding: 3px 2px; color: #000000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quickpost-close-button { position: absolute; }
+.quickpost-close-button .x-close-btn-icon { width: 10px; height: 10px; background-image: url("../images/error-icon.png"); background-repeat: no-repeat; }
+/* drop down footer
+------------------------------------------------ */
+.quickpost-footer { padding: 1px 2px; height: 20px; border-top: 1px solid #808080; cursor: default; }
+.quickpost-footer-content { white-space: nowrap; float: right; margin-right: 5px; }
+.quickpost-footer-left-nav, .quickpost-footer-right-nav { cursor: pointer; }
+.quickpost-footer-info { padding: 0px 5px; font-size: 10px; cursor: text; }
+/* drop down item
+------------------------------------------------ */
+.quickpost-wrapper .selected-item { background-color: yellow; }
+.quickpost-wrapper .quickpost-item:hover { background-color: yellow; }
+/* CSS hacks / fixes for ie8 and below
+ - keeping them separate to keep a track of them.
+------------------------------------------------ */
+/* button look and feel fix for ie7 */
+.quickpost-wrapper .quickpost button { width:auto; overflow:visible; }
+/* mailto link fix for ie8 and below */
+.quickpost-wrapper .quickpost a { font-size: 12px; color: #000000; text-decoration: none !important; }

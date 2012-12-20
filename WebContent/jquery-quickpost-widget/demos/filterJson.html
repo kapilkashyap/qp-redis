@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quick Post Widget - Filter JSON</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="assets/filterJSON.plugin.min.js"></script>
+		<script type="text/javascript" src="assets/prettify.js"></script>
+		<script type="text/javascript" src="../src/paginated.dropdown.widget.min.js"></script>
+		<script type="text/javascript" src="../src/quickpost.widget.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/prettify.css" />
+		<link rel="stylesheet" type="text/css" href="../style/quickpost.widget.css" />
+	</head>
+	<body onload="prettyPrint();">
+		<div class="header">
+			Property: filterJSON (default is null)
+		</div>
+		<div class="marginTB5px explanation">
+			This property can take a boolean value as well as an object notation. Setting this property to anything other than null
+			forces the Paginated Drop Down Widget to use the jQuery filterJSON plugin. As the name suggests, filterJSON plugin can 
+			be used to filter a retrieved JSON Object.<br/>
+			<span class="mandatory">#</span>Setting this property to true will use filterJSON plugin with default values such as below:
+<pre class="prettyprint">
+{
+	"property": &lt;same as valueProperty&gt;,
+	"value": &lt;same as value after triggerOn character and before caret position&gt;,
+	"checkContains": true,
+	"wrapper": true
+}
+</pre>
+			<span class="mandatory">#</span>Setting this property to a valid filterJSON config would force the Paginated Drop Down Widget
+			to extend the default filterJSON config (as shown above).<br/>
+			<span class="mandatory">**</span>An important thing to mention over here is the 'wrapper' property of filterJSON plugin. If it is
+			set to true (as the case should always be) it will return the matched properties containing object. If it is set to false, then the 
+			property itself is returned. However, you are free to pass any valid filterJSON config to the widget as per your requirement.			
+		</div>
+		<div class="marginT15px demo">Demo: default behaviour</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-1" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-1" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;"
+});
+</pre>
+		<div class="marginT15px demo">Demo: Setting filterJSON to true. Will use the default settings for filterJSON plugin.</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-2" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-2" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: true
+});
+</pre>
+		<div class="marginT15px demo">Demo: Setting filterJSON to config object</div>
+		<div class="marginTB5px x-inline-block">
+			<div id="x-demo-3" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+		</div>
+		<div class="marginT15px sample-code">Sample Code:</div>
+<pre class="prettyprint">
+$( "#x-demo-3" ).quickpost({
+	url: "assets/cricketers.json",
+	valueProperty: "name",
+	itemTemplate: "&lt;div title='{@:email}'&gt;&lt;div&gt;{@:name}&lt;/div&gt;&lt;/div&gt;",
+	filterJSON: {startsWith: true}
+});
+</pre>
+	</body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( '#x-demo-1' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>"
+			});
+			$( '#x-demo-2' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: true
+			});
+			$( '#x-demo-3' ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith: true}
+			});
+		});
+	</script>
+</html>

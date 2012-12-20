@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quick Post Widget - Implementation</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="assets/filterJSON.plugin.js"></script>
+		<script type="text/javascript" src="../src/paginated.dropdown.widget.js"></script>
+		<script type="text/javascript" src="../src/quickpost.widget.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/style.css" />
+		<link rel="stylesheet" type="text/css" href="../style/quickpost.widget.css" />
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF;
+				color: #000;
+			}
+			.vertical-align-top {
+				vertical-align: top;
+			}
+			.x-message-container {
+				margin: 25px 0;
+			}
+			.x-message {
+				background-color: #9FBAE9;
+				padding: 3px 0;
+				margin: 0 0 1px 0;
+			}
+			.x-comment {
+				background-color: #E0ECFF;
+				padding: 2px 2px 2px 5px;
+				margin: 0 1px 1px 1px;
+			}
+			.comment-container {
+				margin: 0;
+			}
+			.hidden {
+				display: none;
+			}
+			.quick-post-label {
+				background-color: #5378B9;
+				color: white;
+				padding: 3px 2px;
+				margin: 0 0 1px 0;
+			}
+			.input-row button {
+				background: #9FBAE9;
+				color: white;
+				border: 1px solid #728FC2;
+				cursor: pointer;
+			}
+			.input-row button:hover {
+				background: #728FC2;
+				color: white;
+				border: 1px solid #728FC2;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<div class="marginT10px vertical-align-top" style="margin: 0px auto; padding: 5px; width: 402px;">
+				<div class="quick-post-label">Quick Post...</div>
+				<div id="x-post-demo" class="x-quickpost width400px height30px" contentEditable="true" dir="LTR"></div>
+				<div class="btn-container input-row" style="display: none; padding: 0 !important;">
+					<button id="post" class="floatRight">Post</button>
+				</div><br/>
+				<div id="msg-container"></div>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( "#x-post-demo" ).quickpost({
+				url: "assets/cricketers.json",
+				valueProperty: "name",
+				itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+				filterJSON: {startsWith: true}
+			}).bind( "quickpostitemselected", function( event, data ) {
+				if(window.console) {
+					console.log("callback - quickpostitemselected");
+					console.log(event);
+					console.log(data);
+				}
+		    }).bind( "keyup", function( event ) {
+		    	if($( this ).text() != "") {
+		    		$( this ).parent().siblings( ".btn-container" ).show();
+		    	}
+		    	else {
+		    		$( this ).parent().siblings( ".btn-container" ).hide();
+		    	}
+		    });
+		});
+
+		$( "#post" ).click(function( event ) {
+			var $qpw = $( this ).parent().siblings( ".quickpost-wrapper" );
+
+			$.ajax({
+				url: "/qp-redis/Service/Post",
+				data: {"post": $qpw.find( "input[type='hidden']" ).val()},
+				success: function(data, textStatus, jqXHR) {
+					console.log("-----------------------------");
+					console.log(data);
+					var $post = $( "<div></div>", {"id": data.id, "class": "x-message-container", "html": "<div class='x-message'>" + data.post + "</div>"}),
+				 	$commentContainer = $( "<div></div>", {"class": "comment-container"} ),
+				 	$commentBox = $( "<div></div>", {
+						 				"class": "x-quickpost",
+						 				"contentEditable": "true",
+						 				"dir": "LTR" 
+						 			}).width( 400 ).height( 20 ),
+					$btnContainer = $( "<div></div>", {
+										"class": "btn-container input-row hidden",
+										"style": "padding: 0 !important;",
+										"html": $( "<button></button>", {
+											"class": "floatRight",
+											"html": "Comment"
+										 }).click(function( event ) {
+											var $cqpw = $( this ).parent().siblings( ".quickpost-wrapper" ),
+												$value = $cqpw.find( "input[type='hidden']" ).val();
+											$( this ).parent().siblings( ".comment-container" ).append( $( "<div></div>", {"class": "x-comment","html": $value}) );
+											$cqpw.find( ".quickpost" ).html( "" ).keydown().keyup();
+										})
+									});
+
+					$post.append( $commentContainer ).append( $commentBox ).append( $btnContainer );
+		
+					$commentBox.quickpost({
+						url: "assets/cricketers.json",
+						valueProperty: "name",
+						itemTemplate: "<div title=\"{@:email}\"><div>{@:name}</div></div>",
+						filterJSON: {startsWith: true},
+						increaseHeightAfter: 50,
+						deltaHeight: 10
+					}).bind( "quickpostitemselected", function( event, data ) {
+						if(window.console) {
+							console.log("callback - quickpostitemselected");
+							console.log(event);
+							console.log(data);
+						}
+				    }).bind( "keyup", function( event ) {
+				    	if($( this ).text() != "") {
+				    		$( this ).parent().siblings( ".btn-container" ).show();
+				    	}
+				    	else {
+				    		$( this ).parent().siblings( ".btn-container" ).hide();
+				    	}
+				    });
+		
+					$( "#msg-container" ).prepend( $post );
+				}
+			});
+
+			$qpw.find( ".quickpost" ).html( "" ).keydown().keyup();
+		});
+	</script>
+</html>

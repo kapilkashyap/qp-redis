@@ -1,0 +1,5 @@
+jQuery UI Quick Post Widget Changelog
+
+Version 1.0
+==============================================
+- Initial release
